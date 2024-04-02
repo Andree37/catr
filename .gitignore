@@ -1,0 +1,7 @@
+.idea/
+cmake-build-debug/
+
+# Compiled binary files
+*.o
+*.out
+*.exe
