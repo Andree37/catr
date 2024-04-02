@@ -1,4 +1,10 @@
-# Installation Guide for `catr`
+# `catr` - cat with Range
+
+`catr` is a command-line utility similar to the Unix `cat` command but with enhanced functionality. It allows users to
+extract specific portions of text from a file by defining start and either end or length offering extra flexibility and
+precision in text extraction.
+
+## Installation Guide for `catr`
 
 Follow these steps to install the `catr` command-line tool on your system. This guide assumes you have `gcc` installed
 and are using a Unix-like operating system.
