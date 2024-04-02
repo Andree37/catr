@@ -4,4 +4,5 @@ project(catr C)
 set(CMAKE_C_STANDARD 11)
 
 add_executable(catr
-        catr.c)
+        catr.c
+        catr.h)
