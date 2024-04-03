@@ -10,16 +10,14 @@ fi
 
 mkdir -p "$INSTALL_DIR"
 
-gcc -o catr catr.c
-
-if ! make catr; then
+if ! make; then
     echo "Compilation failed."
     exit 1
 else
     echo "Compilation successful."
 fi
 
-mv catr "$INSTALL_DIR"
+mv "catr" "$INSTALL_DIR"
 
 chmod +x "$INSTALL_DIR/catr"
 
