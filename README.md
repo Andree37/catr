@@ -11,7 +11,7 @@ precision in text extraction.
 Follow these steps to install the `catr` command-line tool on your system. This guide assumes you have `gcc` installed
 and are using a Unix-like operating system.
 
-## Comparing `catr` with `cat`
+## Comparing `catr` with `cat`, `awk`, and `sed`
 
 While both `catr` and `cat` can display text from files, `catr` provides additional capabilities for more specific text
 extraction without the need for combining multiple commands.
