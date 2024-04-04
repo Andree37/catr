@@ -141,9 +141,9 @@ void catr_by_lines(const char *filename, long startLine, long endLine, char **ou
 
 void print_usage(const char *programName) {
     fprintf(stderr, "Usage: %s <file> <start> <length>\n", programName);
-    fprintf(stderr, "       %s -s <file> <start> <end>\n", programName);
+    fprintf(stderr, "       %s -r <file> <start> <end>\n", programName);
     fprintf(stderr, "       %s -l <file> <start line> <length>\n", programName);
-    fprintf(stderr, "       %s -sl <file> <start line> <end line>\n", programName);
+    fprintf(stderr, "       %s -rl <file> <start line> <end line>\n", programName);
 }
 
 int parse_args(int argc, char *argv[], const char **filename, long *start, long *end, int *mode) {
@@ -165,13 +165,13 @@ int parse_args(int argc, char *argv[], const char **filename, long *start, long 
         return 1;
     }
 
-    if (strcmp(argv[argOffset + 1], "-s") == 0) {
+    if (strcmp(argv[argOffset + 1], "-r") == 0) {
         *mode = CHAR_RANGE_MODE;
         argOffset += 1;
     } else if (strcmp(argv[argOffset + 1], "-l") == 0) {
         *mode = LINE_LENGTH_MODE;
         argOffset += 1;
-    } else if (strcmp(argv[argOffset + 1], "-sl") == 0) {
+    } else if (strcmp(argv[argOffset + 1], "-rl") == 0) {
         *mode = LINE_RANGE_MODE;
         argOffset += 1;
     } else {
