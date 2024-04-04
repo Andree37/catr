@@ -4,6 +4,8 @@
 extract specific portions of text from a file by defining start and either end or length offering extra flexibility and
 precision in text extraction.
 
+`catr` is Licensed under GLWTS. For more information, please refer to the [LICENSE](LICENSE) file.
+
 ## Installation Guide for `catr`
 
 Follow these steps to install the `catr` command-line tool on your system. This guide assumes you have `gcc` installed
