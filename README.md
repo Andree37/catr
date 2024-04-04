@@ -16,22 +16,42 @@ and are using a Unix-like operating system.
 While both `catr` and `cat` can display text from files, `catr` provides additional capabilities for more specific text
 extraction without the need for combining multiple commands.
 
-| Task                                 | `catr` Usage                          | Time to run (s) |
-|--------------------------------------|---------------------------------------|-----------------| 
-| Extract 100 chars range from char 50 | `catr test_input/lorem.txt 50 100`    | 0.006           |
-| Extract chars from 50 to 100         | `catr test_input/lorem.txt -r 50 100` | 0.006           |
-| Extract lines range 3 to 5           | `catr test_input/lorem.txt -rl 3 5`   | 0.008           |
-| Extract 5 lines from line 3          | `catr test_input/lorem.txt -l 3 5`    | 0.007           |
+| Task                                 | `catr` Usage                          | Time to run (µs) |
+|--------------------------------------|---------------------------------------|------------------| 
+| Extract 100 chars range from char 50 | `catr test_input/lorem.txt 50 100`    | 38.6             |
+| Extract chars from 50 to 100         | `catr test_input/lorem.txt -r 50 100` | 33.6             |
+| Extract lines range 3 to 5           | `catr test_input/lorem.txt -rl 3 5`   | 51.2             |
+| Extract 5 lines from line 3          | `catr test_input/lorem.txt -l 3 5`    | 48.3             |
 
-The same with cat would be 3 times more expensive with the following commands, the main reason is that we are running
+The same with cat would be 20 times more expensive with the following commands, the main reason is that we are running
 multiple commands to achieve the same result that can be done with a single command in `catr`.
 
-| Task                                 | `cat` Equivalent Usage                                   | Time to run (s) |
-|--------------------------------------|----------------------------------------------------------|-----------------|
-| Extract 100 chars range from char 50 | `cat test_input/lorem.txt \| tail -c +50 \| head -c 101` | 0.014           |
-| Extract chars from 50 to 100         | `cat test_input/lorem.txt \| head -c 100 \| tail -c +50` | 0.015           |
-| Extract lines range 3 to 5           | `cat test_input/lorem.txt \| head -n 5 \| tail -n +3'`   | 0.016           |
-| Extract 5 lines from line 3          | `cat test_input/lorem.txt \| tail -n +5 \| head -n 3`    | 0.014           |
+`cat` equivalent commands:
+
+| Task                                 | `cat` Equivalent Usage                                   | Time to run (µs) |
+|--------------------------------------|----------------------------------------------------------|------------------|
+| Extract 100 chars range from char 50 | `cat test_input/lorem.txt \| tail -c +50 \| head -c 101` | 735.2            |
+| Extract chars from 50 to 100         | `cat test_input/lorem.txt \| head -c 100 \| tail -c +50` | 605.4            |
+| Extract lines range 3 to 5           | `cat test_input/lorem.txt \| head -n 5 \| tail -n +3`    | 726.5            |
+| Extract 5 lines from line 3          | `cat test_input/lorem.txt \| tail -n +5 \| head -n 3`    | 652.0            |
+
+`awk` equivalent commands:
+
+| Task                                 | `awk` Equivalent Usage                        | Time to run (µs) |
+|--------------------------------------|-----------------------------------------------|------------------|
+| Extract 100 chars range from char 50 | Not straightforward with `awk` for characters | N/A              |
+| Extract chars from 50 to 100         | Not straightforward with `awk` for characters | N/A              |
+| Extract lines range 3 to 5           | `awk 'NR>=3 && NR<=5' test_input/lorem.txt`   | 93.3             |
+| Extract 5 lines from line 3          | `awk 'NR>=3 && NR<=7' test_input/lorem.txt`   | 56.6             |
+
+`sed` equivalent commands:
+
+| Task                                 | `sed` Equivalent Usage                        | Time to run (µs) |
+|--------------------------------------|-----------------------------------------------|------------------|
+| Extract 100 chars range from char 50 | Not straightforward with `sed` for characters | N/A              |
+| Extract chars from 50 to 100         | Not straightforward with `sed` for characters | N/A              |
+| Extract lines range 3 to 5           | `sed -n '3,5p' test_input/lorem.txt`          | 75.0             |
+| Extract 5 lines from line 3          | `sed -n '3,7p' test_input/lorem.txt`          | 59.8             |
 
 `catr` is more concise and easier to use for these tasks. And it also provides a more intuitive way to extract text
 which could be useful for users who are not familiar with Unix commands and all the intricacies.
