@@ -77,12 +77,12 @@ Congratulations! You have successfully installed `catr` on your system.
 While both `catr` and `cat` can display text from files, `catr` provides additional capabilities for more specific text
 extraction without the need for combining multiple commands.
 
-| Task                                                    | `catr` Usage              | `cat` Equivalent Usage                                 |
-|---------------------------------------------------------|---------------------------|--------------------------------------------------------|
-| Extract 100 characters range starting from character 50 | `catr file.txt 50 100`    | `cat file.txt \| tail -c +50 \| head -c 101`           |
-| Extract characters range 50 to 100                      | `catr file.txt -r 50 100` | `cat file.txt \| head -c 100 \| tail -c +50`           |
-| Extract lines range 3 to 5                              | `catr file.txt -rl 3 5`   | `cat test_input/lorem.txt \| head -n 5 \| tail -n +3'` |
-| Extract 5 lines starting from line 3                    | `catr file.txt -l 3 5`    | `cat test_input/lorem.txt \| tail -n +5 \| head -n 3`  |
+| Task                                 | `catr` Usage              | `cat` Equivalent Usage                                 |
+|--------------------------------------|---------------------------|--------------------------------------------------------|
+| Extract 100 chars range from char 50 | `catr file.txt 50 100`    | `cat file.txt \| tail -c +50 \| head -c 101`           |
+| Extract chars from 50 to 100         | `catr file.txt -r 50 100` | `cat file.txt \| head -c 100 \| tail -c +50`           |
+| Extract lines range 3 to 5           | `catr file.txt -rl 3 5`   | `cat test_input/lorem.txt \| head -n 5 \| tail -n +3'` |
+| Extract 5 lines from line 3          | `catr file.txt -l 3 5`    | `cat test_input/lorem.txt \| tail -n +5 \| head -n 3`  |
 
 By providing a straightforward syntax for these tasks, `catr` enhances the usability and readability of command-line
 text processing.
