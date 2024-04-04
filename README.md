@@ -16,6 +16,9 @@ and are using a Unix-like operating system.
 While both `catr` and `cat` can display text from files, `catr` provides additional capabilities for more specific text
 extraction without the need for combining multiple commands.
 
+All the following examples are ran with [hyperfine](https://github.com/sharkdp/hyperfine) to measure the time it takes
+to run each command. The tests were run on a MacBook Pro M2 Pro chip, 16GB RAM, and macOS 14.3.1.
+
 | Task                                 | `catr` Usage                          | Time to run (µs) |
 |--------------------------------------|---------------------------------------|------------------| 
 | Extract 100 chars range from char 50 | `catr test_input/lorem.txt 50 100`    | 38.6             |
