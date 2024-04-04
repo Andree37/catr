@@ -16,12 +16,23 @@ and are using a Unix-like operating system.
 While both `catr` and `cat` can display text from files, `catr` provides additional capabilities for more specific text
 extraction without the need for combining multiple commands.
 
-| Task                                  | `catr` Usage              | `cat` Equivalent Usage                       |
-|---------------------------------------|---------------------------|----------------------------------------------|
-| Extract 100 chars starting at char 50 | `catr -s file.txt 50 150` | `cat file.txt \| tail -c +50 \| head -c 101` |
-| Extract chars from 50 to 100          | `catr -s file.txt 50 100` | `cat file.txt \| head -c 100 \| tail -c +51` |
-| Extract lines range 3 to 5            | `catr -sl file.txt 3 5`   | `cat file.txt \| head -n 5 \| tail -n +3`    |
-| Extract 5 lines starting from line 3  | `catr -l file.txt 3 5`    | `cat file.txt \| tail -n +3 \| head -n 5`    |
+### Comparing `catr` and `cat` Usage
+
+1. **Extract 100 characters starting from character 50:**
+    - `catr` Usage: `catr file.txt 50 100`
+    - `cat` Equivalent: `cat file.txt | tail -c +50 | head -c 101`
+
+2. **Extract characters from 50 to 100:**
+    - `catr` Usage: `catr file.txt -r 50 100`
+    - `cat` Equivalent: `cat file.txt | head -c 100 | tail -c +51`
+
+3. **Extract lines range 3 to 5:**
+    - `catr` Usage: `catr file.txt -rl 3 5`
+    - `cat` Equivalent: `cat file.txt | head -n 5 | tail -n +3`
+
+4. **Extract 5 lines starting from line 3:**
+    - `catr` Usage: `catr file.txt -l 3 5`
+    - `cat` Equivalent: `cat file.txt | tail -n +3 | head -n 5`
 
 ### Prerequisites
 
