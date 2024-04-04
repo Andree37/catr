@@ -149,40 +149,51 @@ void print_usage(const char *programName) {
 int parse_args(int argc, char *argv[], const char **filename, long *start, long *end, int *mode) {
     char *endptr;
 
-    if (argc < 3) {
+    if (argc == 1 || (argc <= 2 && ((strcmp(argv[1], "-h") == 0) || strcmp(argv[1], "--help") == 0))) {
         print_usage(argv[0]);
         return 0;
     }
 
-    int argOffset = 0;
+    int argOffset = 1;
     *mode = CHAR_LENGTH_MODE;
 
-    if (strcmp(argv[1], "-s") == 0) {
+    *filename = argv[argOffset];
+
+    if (argc <= 2) {
+        *start = 1;
+        *end = LONG_MAX;
+        return 1;
+    }
+
+    if (strcmp(argv[argOffset + 1], "-s") == 0) {
         *mode = CHAR_RANGE_MODE;
-        argOffset = 1;
-        if (argc <= 3 + argOffset) {
-            fprintf(stderr, "end value is required for -s option.\n");
+        argOffset += 1;
+    } else if (strcmp(argv[argOffset + 1], "-l") == 0) {
+        *mode = LINE_LENGTH_MODE;
+        argOffset += 1;
+    } else if (strcmp(argv[argOffset + 1], "-sl") == 0) {
+        *mode = LINE_RANGE_MODE;
+        argOffset += 1;
+    } else {
+        // unknown mode that is not the default mode
+        if (argc > argOffset + 1 && argv[argOffset + 1][0] == '-') {
+            fprintf(stderr, "unknown mode.\n");
             return 0;
         }
-    } else if (strcmp(argv[1], "-l") == 0) {
-        *mode = LINE_LENGTH_MODE;
-        argOffset = 1;
-    } else if (strcmp(argv[1], "-sl") == 0) {
-        *mode = LINE_RANGE_MODE;
-        argOffset = 1;
     }
 
-    *filename = argv[1 + argOffset];
-
-    *start = strtol(argv[2 + argOffset], &endptr, 10);
-    if (*endptr != '\0' || *start <= 0) {
-        fprintf(stderr, "invalid start value.\n");
-        return 0;
+    *start = 1; // default start value
+    if (argc > argOffset + 1) {
+        *start = strtol(argv[argOffset + 1], &endptr, 10);
+        if (*endptr != '\0' || *start <= 0) {
+            fprintf(stderr, "invalid start value.\n");
+            return 0;
+        }
     }
 
-    *end = LONG_MAX;
-    if (argc > 3 + argOffset) {
-        *end = strtol(argv[3 + argOffset], &endptr, 10);
+    *end = LONG_MAX; // default end value
+    if (argc > argOffset + 2) {
+        *end = strtol(argv[argOffset + 2], &endptr, 10);
         if (*endptr != '\0' || *end < 0) {
             fprintf(stderr, "invalid end value.\n");
             return 0;
@@ -213,8 +224,7 @@ void extract(const char *filename, long start, long end, int mode) {
         return;
     }
 
-    // Set end to fileSize for -l and default mode if end is not provided
-    if (end == LONG_MAX && (mode == LINE_LENGTH_MODE || mode == LINE_RANGE_MODE || mode == CHAR_LENGTH_MODE)) {
+    if (end == LONG_MAX) {
         end = fileSize;
     }
 
