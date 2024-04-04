@@ -56,6 +56,8 @@ multiple commands to achieve the same result that can be done with a single comm
 `catr` is more concise and easier to use for these tasks. And it also provides a more intuitive way to extract text
 which could be useful for users who are not familiar with Unix commands and all the intricacies.
 
+---
+
 ### Prerequisites
 
 - Ensure you have `gcc` installed on your system to compile the source code. You can check this by
