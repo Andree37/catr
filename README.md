@@ -16,23 +16,24 @@ and are using a Unix-like operating system.
 While both `catr` and `cat` can display text from files, `catr` provides additional capabilities for more specific text
 extraction without the need for combining multiple commands.
 
-### Comparing `catr` and `cat` Usage
+| Task                                 | `catr` Usage              |
+|--------------------------------------|---------------------------|
+| Extract 100 chars range from char 50 | `catr file.txt 50 100`    |
+| Extract chars from 50 to 100         | `catr file.txt -r 50 100` |
+| Extract lines range 3 to 5           | `catr file.txt -rl 3 5`   |
+| Extract 5 lines from line 3          | `catr file.txt -l 3 5`    |
 
-1. **Extract 100 characters starting from character 50:**
-    - `catr` Usage: `catr file.txt 50 100`
-    - `cat` Equivalent: `cat file.txt | tail -c +50 | head -c 101`
+The same with cat would be:
 
-2. **Extract characters from 50 to 100:**
-    - `catr` Usage: `catr file.txt -r 50 100`
-    - `cat` Equivalent: `cat file.txt | head -c 100 | tail -c +51`
+| Task                                 | `cat` Equivalent Usage                                 |
+|--------------------------------------|--------------------------------------------------------|
+| Extract 100 chars range from char 50 | `cat file.txt \| tail -c +50 \| head -c 101`           |
+| Extract chars from 50 to 100         | `cat file.txt \| head -c 100 \| tail -c +50`           |
+| Extract lines range 3 to 5           | `cat test_input/lorem.txt \| head -n 5 \| tail -n +3'` |
+| Extract 5 lines from line 3          | `cat test_input/lorem.txt \| tail -n +5 \| head -n 3`  |
 
-3. **Extract lines range 3 to 5:**
-    - `catr` Usage: `catr file.txt -rl 3 5`
-    - `cat` Equivalent: `cat file.txt | head -n 5 | tail -n +3`
-
-4. **Extract 5 lines starting from line 3:**
-    - `catr` Usage: `catr file.txt -l 3 5`
-    - `cat` Equivalent: `cat file.txt | tail -n +3 | head -n 5`
+`catr` is more concise and easier to use for these tasks. And it also provides a more intuitive way to extract text
+which could be useful for users who are not familiar with Unix commands and all the intricacies.
 
 ### Prerequisites
 
