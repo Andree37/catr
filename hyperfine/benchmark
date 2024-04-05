@@ -1,0 +1,18 @@
+#!/bin/bash
+
+commands=(
+  "catr test_input/lorem.txt 50 100"
+  "catr test_input/lorem.txt -r 50 100"
+  "catr test_input/lorem.txt -rl 3 5"
+  "catr test_input/lorem.txt -l 3 5"
+  "cat test_input/lorem.txt | tail -c +50 | head -c 101"
+  "cat test_input/lorem.txt | head -c 100 | tail -c +51"
+  "cat test_input/lorem.txt | head -n 5 | tail -n +3"
+  "cat test_input/lorem.txt | tail -n +3 | head -n 5"
+  "awk 'NR>=3 && NR<=5' test_input/lorem.txt"
+  "awk 'NR>=3 && NR<=7' test_input/lorem.txt"
+  "sed -n '3,5p' test_input/lorem.txt"
+  "sed -n '3,7p' test_input/lorem.txt"
+)
+
+hyperfine --warmup 3 --ignore-failure "${commands[@]}" --export-markdown docs/results.md

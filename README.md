@@ -50,42 +50,11 @@ extraction without the need for combining multiple commands.
 All the following examples are ran with [hyperfine](https://github.com/sharkdp/hyperfine) to measure the time it takes
 to run each command. The tests were run on a MacBook Pro M2 Pro chip, 16GB RAM, and macOS 14.3.1.
 
-| Task                                 | `catr` Usage                          | Time to run (µs) |
-|--------------------------------------|---------------------------------------|------------------| 
-| Extract 100 chars range from char 50 | `catr test_input/lorem.txt 50 100`    | 38.6             |
-| Extract chars from 50 to 100         | `catr test_input/lorem.txt -r 50 100` | 33.6             |
-| Extract lines range 3 to 5           | `catr test_input/lorem.txt -rl 3 5`   | 51.2             |
-| Extract 5 lines from line 3          | `catr test_input/lorem.txt -l 3 5`    | 48.3             |
+For more information on the tests, please refer to the [hyperfine results](docs/results.md).
 
-The same with cat would be 20 times more expensive with the following commands, the main reason is that we are running
-multiple commands to achieve the same result that can be done with a single command in `catr`.
+Here is an overview of the results:
 
-`cat` equivalent commands:
-
-| Task                                 | `cat` Equivalent Usage                                   | Time to run (µs) |
-|--------------------------------------|----------------------------------------------------------|------------------|
-| Extract 100 chars range from char 50 | `cat test_input/lorem.txt \| tail -c +50 \| head -c 101` | 735.2            |
-| Extract chars from 50 to 100         | `cat test_input/lorem.txt \| head -c 100 \| tail -c +50` | 605.4            |
-| Extract lines range 3 to 5           | `cat test_input/lorem.txt \| head -n 5 \| tail -n +3`    | 726.5            |
-| Extract 5 lines from line 3          | `cat test_input/lorem.txt \| tail -n +5 \| head -n 3`    | 652.0            |
-
-`awk` equivalent commands:
-
-| Task                                 | `awk` Equivalent Usage                        | Time to run (µs) |
-|--------------------------------------|-----------------------------------------------|------------------|
-| Extract 100 chars range from char 50 | Not straightforward with `awk` for characters | N/A              |
-| Extract chars from 50 to 100         | Not straightforward with `awk` for characters | N/A              |
-| Extract lines range 3 to 5           | `awk 'NR>=3 && NR<=5' test_input/lorem.txt`   | 93.3             |
-| Extract 5 lines from line 3          | `awk 'NR>=3 && NR<=7' test_input/lorem.txt`   | 56.6             |
-
-`sed` equivalent commands:
-
-| Task                                 | `sed` Equivalent Usage                        | Time to run (µs) |
-|--------------------------------------|-----------------------------------------------|------------------|
-| Extract 100 chars range from char 50 | Not straightforward with `sed` for characters | N/A              |
-| Extract chars from 50 to 100         | Not straightforward with `sed` for characters | N/A              |
-| Extract lines range 3 to 5           | `sed -n '3,5p' test_input/lorem.txt`          | 75.0             |
-| Extract 5 lines from line 3          | `sed -n '3,7p' test_input/lorem.txt`          | 59.8             |
+![img.png](docs/summary.png)
 
 `catr` is more concise and easier to use for these tasks. And it also provides a more intuitive way to extract text
 which could be useful for users who are not familiar with Unix commands and all the intricacies.
@@ -152,14 +121,3 @@ catr --help
 This command should display the usage information for `catr`.
 
 Congratulations! You have successfully installed `catr` on your system.
-
-## cat WHO?
-
-| Command                     |     Mean [µs] | Min [µs] | Max [µs] |    Relative |
-|:----------------------------|--------------:|---------:|---------:|------------:|
-| `catr test_input/lorem.txt` |  637.8 ± 29.6 |    598.5 |   1076.8 |        1.00 |
-| `cat test_input/lorem.txt`  | 1176.6 ± 32.4 |   1112.2 |   1559.8 | 1.84 ± 0.10 |
-
-Summary
-`catr test_input/lorem.txt` ran
-**1.84 ± 0.10** times faster than `cat test_input/lorem.txt`
