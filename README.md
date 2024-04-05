@@ -152,3 +152,14 @@ catr --help
 This command should display the usage information for `catr`.
 
 Congratulations! You have successfully installed `catr` on your system.
+
+## cat WHO?
+
+| Command                     |     Mean [µs] | Min [µs] | Max [µs] |    Relative |
+|:----------------------------|--------------:|---------:|---------:|------------:|
+| `catr test_input/lorem.txt` |  637.8 ± 29.6 |    598.5 |   1076.8 |        1.00 |
+| `cat test_input/lorem.txt`  | 1176.6 ± 32.4 |   1112.2 |   1559.8 | 1.84 ± 0.10 |
+
+Summary
+`catr test_input/lorem.txt` ran
+**1.84 ± 0.10** times faster than `cat test_input/lorem.txt`
