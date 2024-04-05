@@ -5,5 +5,4 @@ set(CMAKE_C_STANDARD 11)
 
 add_executable(catr
         src/catr.c
-        src/catr.h
         src/modes.h)
