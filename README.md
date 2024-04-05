@@ -6,6 +6,37 @@ precision in text extraction.
 
 `catr` is licensed under GLWTS. For more information, please refer to the LICENSE file.
 
+## `catr` Usage Overview
+
+`catr` enhances the traditional Unix `cat` command, offering targeted text extraction capabilities. With `catr`, users
+can effortlessly extract character or line ranges from a file.
+
+### Quick Examples
+
+- **Character Count from a Character**: Extract 10 characters starting from the 50th character from `file.txt`:
+
+```sh
+catr file.txt 50 10
+```
+
+- **Character Range**: Extract characters 50 to 100 from `file.txt`:
+
+```sh
+catr file.txt -r 50 100
+```
+
+- **Line Range**: Extract lines 10 to 20 from `file.txt`:
+
+```sh
+catr file.txt -rl 10 20
+```
+
+- **Line Count from a Line**: Extract 5 lines starting at line 3 from `file.txt`:
+
+```sh
+catr file.txt -l 3 5
+```
+
 ## Installation Guide for `catr`
 
 Follow these steps to install the `catr` command-line tool on your system. This guide assumes you have `gcc` installed
