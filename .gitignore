@@ -1,6 +1,8 @@
 .idea/
 cmake-build-debug/
 
+.DS_Store
+
 # Compiled binary files
 *.o
 *.out

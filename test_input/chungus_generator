@@ -1,0 +1,4 @@
+#!/bin/bash
+echo "This will take a while to generate chungus.txt. Please be patient..."
+LC_ALL=C tr -dc "A-Za-z0-9" < /dev/urandom | fold -w 100 | head -n 1000000 > test_input/chungus.txt
+echo "Done!"
